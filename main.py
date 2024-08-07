@@ -51,8 +51,7 @@ def get_member_id(call):
             f.write(str(call.from_user.id) + ',')
             f.close()
         else:
-            already_get(call=call)
-            return True
+            bot.send_message(chat_id = call.chat.id, parse_mode='HTML', text = "<strong>Вы уже являетесь подписчиком</strong>")
     except FileNotFoundError as e:
         print(e)
 @bot.callback_query_handler(func = lambda call: call.data in ['Мужчина'])
@@ -108,7 +107,7 @@ def start(message):
         elif(str(user_id) in check):
             bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже получили приз!</strong>")
         elif(str(user_id) in check1):
-            bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже являетесь подписчиком!</strong>")
+            get_member_id(message)
     except Exception as e: 
         bot.send_message(user_id, e) 
 
