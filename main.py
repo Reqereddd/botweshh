@@ -2,14 +2,14 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import random
 bot = telebot.TeleBot('7262258841:AAHduA6AaHXE2kehIMatUQ81VL2IMYaixts') 
-m_list = ["Шарф", "Футболка"]
-w_list = ["Шарф/Платок", "Футболка","Джинсы/Брюки","Юбка","Платье","Блузка/Рубашка"]
+m_list = ["Шарф", "Футболку"]
+w_list = ["Шарф/Платок", "Футболку","Джинсы/Брюки","Юбку","Платье","Блузку/Рубашку"]
 w_list_weights = [25,25,15,15,10,10]
 channel_id = '-1001522214922'
 def gen_markup():
     markup = InlineKeyboardMarkup()
     markup.row_width = 1
-    markup.add(InlineKeyboardButton("Подписаться на канал","https://t.me/+N6xL0AutGzo4YjAy"))
+    markup.add(InlineKeyboardButton("Подписаться на канал","https://t.me/+jBli0S8x2cxhYTEy"))
     return markup
 
 def gen_markup_for_adress():
@@ -47,10 +47,10 @@ def genpriceman(call):
     flag = get_user_id(call = call)
     if call.data == 'Мужчина' and flag != True:
         random_index = random.randint(0, len(m_list) - 1)
-        message = "Поздравляею! Вы выиграли " + m_list[random_index] + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
+        message = "Поздравляю! Вы выиграли " + m_list[random_index] + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
         bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
     elif call.data == 'Женщина' and flag != True:
-        message = "Поздравляею! Вы выиграли " + str((random.choices(w_list, w_list_weights))[0]) + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
+        message = "Поздравляю! Вы выиграли " + str((random.choices(w_list, w_list_weights))[0]) + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
         bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message, reply_markup = gen_markup_for_adress())
 
 @bot.callback_query_handler(func = lambda call: call.data in ['Женщина'])
@@ -81,11 +81,11 @@ def start(message):
             chat_member = bot.get_chat_member(channel_id, user_id)
             if (chat_member.status in ['left','kicked']): 
                 check_channel_subscribe_message(user_id=user_id)
-                while(chat_member.status in ['left','kicked','creator']):
-                    if(bot.get_chat_member(channel_id, user_id).status in ['member','creator']):
+                while(chat_member.status in ['left','kicked','creator','administrator']):
+                    if(bot.get_chat_member(channel_id, user_id).status in ['member','creator','administrator']):
                         pickgender(user_id = user_id,user_name=user_name, chat_id = message.chat.id)
                         break
-            elif(chat_member.status in ['creator']):
+            elif(chat_member.status in ['creator','administrator']):
                 pickgender(user_id = user_id, user_name=user_name, chat_id = message.chat.id)
         else:
             bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже получили приз!</strong>")  
