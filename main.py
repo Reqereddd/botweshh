@@ -2,8 +2,8 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import random
 bot = telebot.TeleBot('7262258841:AAHduA6AaHXE2kehIMatUQ81VL2IMYaixts') 
-m_list = ["Шарф", "Футболка"]
-w_list = ["Шарф/Платок", "Футболка","Джинсы/Брюки","Юбка","Платье","Блузка/Рубашка"]
+m_list = ["Шарф", "Футболку"]
+w_list = ["Шарф/Платок", "Футболку","Джинсы/Брюки","Юбку","Платье","Блузку/Рубашку"]
 w_list_weights = [25,25,15,15,10,10]
 channel_id = '-1001522214922'
 def gen_markup():
@@ -74,7 +74,7 @@ def genpricewoman(call):
         bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
 
 def check_channel_subscribe_message(user_id):
-    return bot.send_message(user_id, "Не подписаны на канал!",reply_markup=gen_markup())
+    return bot.send_message(user_id, "Подпишись на канал и выиграй приз!",reply_markup=gen_markup())
 
 def pickgender(user_id, chat_id, user_name):
     return bot.edit_message_text(chat_id = chat_id, message_id = check_channel_subscribe_message(user_id).message_id, text = " " + user_name + ", выбери пол👇", reply_markup = gen_markup_for_gender())
@@ -108,7 +108,7 @@ def start(message):
         elif(str(user_id) in check):
             bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже получили приз!</strong>")
         elif(str(user_id) in check1):
-            bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже являетесь подписчиком</strong>")
+            bot.send_message(chat_id = message.chat.id, parse_mode='HTML', text = "<strong>Вы уже являетесь подписчиком!</strong>")
     except Exception as e: 
         bot.send_message(user_id, e) 
 
