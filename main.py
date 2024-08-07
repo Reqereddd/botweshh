@@ -61,7 +61,7 @@ def genpricewoman(call):
         bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
 
 def check_channel_subscribe_message(user_id):
-    return bot.send_message(user_id, "Не подписаны на канал!",reply_markup=gen_markup())
+    return bot.send_message(user_id, "Подпишись на канал и Выиграй приз!",reply_markup=gen_markup())
 
 def pickgender(user_id, chat_id, user_name):
     return bot.edit_message_text(chat_id = chat_id, message_id = check_channel_subscribe_message(user_id).message_id, text = " " + user_name + ", выбери пол👇", reply_markup = gen_markup_for_gender())
