@@ -41,7 +41,6 @@ def get_user_id(call):
             return True
     except FileNotFoundError as e:
         print(e)
-<<<<<<< HEAD
 def get_id(call):
     try:
         f = open('users.txt', 'r')
@@ -53,8 +52,6 @@ def get_id(call):
             pass
     except FileNotFoundError as e:
         print(e)
-=======
->>>>>>> 89357f387334e6255f7a668991bd0425f2506881
 def get_member_id(call):
     try:
         f = open('members.txt', 'r')
@@ -74,21 +71,12 @@ def genpriceman(call):
     id = get_id(call)
     if not flag:
         random_index = random.randint(0, len(m_list) - 1)
-<<<<<<< HEAD
         message = "Номер выигрыша: " + str(id) + "\nПоздравляю! Вы выиграли " + m_list[random_index] + "\nЗабрать можно по адресу: <b>Будапештская 39</b>\n\n❗️<b>Выигрыш можно получить в течение 14 дней</b>❗️"
         bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
-=======
-        message = "Поздравляю! Вы выиграли " + m_list[random_index] + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
-        bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
-    elif call.data == 'Женщина' and flag != True:
-        message = "Поздравляю! Вы выиграли " + str((random.choices(w_list, w_list_weights))[0]) + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
-        bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message, reply_markup = gen_markup_for_adress())
->>>>>>> 89357f387334e6255f7a668991bd0425f2506881
 
 @bot.callback_query_handler(func = lambda call: call.data in ['Женщина'])
 def genpricewoman(call):
     flag = get_user_id(call = call)
-<<<<<<< HEAD
     id = get_id(call)
     if not flag:
         message = "Номер выигрыша:" + str(id) + "\nПоздравляю! Вы выиграли " + str((random.choices(w_list, w_list_weights))[0]) + "\nЗабрать можно по адресу: <b>Будапештская 39</b>\n\n❗️<b>Выигрыш можно получить в течение 14 дней</b>❗️"
@@ -96,14 +84,6 @@ def genpricewoman(call):
 
 def check_channel_subscribe_message(user_id):
     return bot.send_message(user_id, "Подпишитесь на канал, чтобы получить приз❗️",reply_markup=gen_markup())
-=======
-    if flag != True:
-        message = "Поздравляю! Вы выиграли " + str((random.choices(w_list, w_list_weights))[0]) + "\nЗабрать можно по адресу: <b>Будапештская 39</b>"
-        bot.edit_message_text(message_id = call.message.id, parse_mode='HTML', chat_id = call.message.chat.id, text = message,reply_markup=gen_markup_for_adress())
-
-def check_channel_subscribe_message(user_id):
-    return bot.send_message(user_id, "Подпишись на канал и выиграй приз!",reply_markup=gen_markup())
->>>>>>> 89357f387334e6255f7a668991bd0425f2506881
 
 def pickgender(user_id, chat_id, user_name):
     return bot.edit_message_text(chat_id = chat_id, message_id = check_channel_subscribe_message(user_id).message_id, text = " " + user_name + ", выбери пол👇", reply_markup = gen_markup_for_gender())
@@ -122,10 +102,6 @@ def start(message):
         g = open('members.txt','r')
         check1 = str.split(g.read(),',')
         g.close()
-<<<<<<< HEAD
-        bot.cha
-=======
->>>>>>> 89357f387334e6255f7a668991bd0425f2506881
         if(not (str(user_id) in check) and not (str(user_id) in check1)):
             chat_member = bot.get_chat_member(channel_id, user_id)
             if (chat_member.status in ['left','kicked']): 
@@ -144,9 +120,4 @@ def start(message):
             get_member_id(message)
     except Exception as e: 
         bot.send_message(user_id, e) 
-<<<<<<< HEAD
 bot.polling()
-=======
-
-bot.polling()
->>>>>>> 89357f387334e6255f7a668991bd0425f2506881
