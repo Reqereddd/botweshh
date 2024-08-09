@@ -1,11 +1,14 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+import os
+from dotenv import load_dotenv,dotenv_values
 import random
-bot = telebot.TeleBot('7262258841:AAHduA6AaHXE2kehIMatUQ81VL2IMYaixts') 
+load_dotenv()
+bot = telebot.TeleBot(os.getenv("TOKEN")) 
 m_list = ["Шарф", "Футболку"]
 w_list = ["Шарф/Платок", "Футболку","Джинсы/Брюки","Юбку","Платье","Блузку/Рубашку"]
 w_list_weights = [25,25,15,15,10,10]
-channel_id = '-1001522214922'
+channel_id = os.getenv("CHAT_ID")
 def gen_markup():
     markup = InlineKeyboardMarkup()
     markup.row_width = 1
